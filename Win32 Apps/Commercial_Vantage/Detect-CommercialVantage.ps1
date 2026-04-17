@@ -15,7 +15,7 @@ try
         if ($vantageServiceFile)
         {
             # Extract the version information
-            $serviceVersion = [version]$vantageServiceFile.VersionInfo.FileVersion
+            $serviceVersion = [version]($vantageServiceFile.VersionInfo.FileVersion).Trim()
         }
         else
         {
@@ -31,7 +31,7 @@ try
 
 
     $minServiceVersion = [version]"3.8.23.0"
-    if ($serviceVersion -le $minServiceVersion)
+    if ($serviceVersion -lt $minServiceVersion)
     {
         Write-Output "Lenovo Vantage Service is outdated (found version $serviceVersion, required minimum $minServiceVersion)."
         exit 1
